@@ -3,7 +3,7 @@ export default class AbstractComponent {
     this.application = application;
   }
 
-  render($el) {
+  render(el) {
     throw new Error('Method start should be implement');
   }
 }
