@@ -1,0 +1,11 @@
+{
+  "name": "jaspp",
+  "version": "0.0.1",
+  "description": "Lightweight JavaScript library for building javascript application",
+  "main": "index.js",
+  "author": "Amaury Lavieille",
+  "license": "MIT",
+  "dependencies": {
+    "webpack": "^4.20.0"
+  }
+}
