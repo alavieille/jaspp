@@ -10,17 +10,18 @@ export default class Application {
     }
 
     start() {
+      this.dispatch('before:start', this);
       this.renderViewComponents(document);
       this.addEventListener('dom.update', (el) => {
         this.renderViewComponents(el);
       });
+      this.dispatch('after:start', this);
     }
 
     addEventListener(event, listener) {
       if (!this.eventTopics[event] || this.eventTopics[event].length < 1) {
         this.eventTopics[event] = [];
       }
-
       this.eventTopics[event].push(listener);
     }
 
@@ -35,22 +36,26 @@ export default class Application {
 
     renderViewComponents(container) {
       const componentsContainer = container.querySelectorAll('[' + this.options.dataAttribute + ']');
-      for (let el of componentsContainer) {
-        const componentName = el.getAttribute(this.options.dataAttribute);
-        try {
-          this._renderViewComponent(componentName, el);
-        } catch (exception) {
-          this.dispatch('error', exception);
-        }
+      if (container instanceof HTMLElement && container.hasAttribute(this.options.dataAttribute)) {
+        this._renderViewComponent(container);
+      }
+
+      for (const el of componentsContainer) {
+        this._renderViewComponent(el);
       }
     }
 
-    _renderViewComponent(componentName, el) {
-      console.log(componentName);
+    _renderViewComponent(el) {
+      const componentName = el.getAttribute(this.options.dataAttribute);
       if (this.components[componentName]) {
-        const componentClass = this.components[componentName];
-        const component = new componentClass(this);
-        component.render(el);
+        try {
+          const componentClass = this.components[componentName];
+          const component = new componentClass(this);
+          component.render(el);
+        } catch (exception) {
+          console.log(exception);
+          this.dispatch('error', exception);
+        }
       }
     }
 }
