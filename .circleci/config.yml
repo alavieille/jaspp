@@ -34,4 +34,4 @@ jobs:
           command: npm run coverage
 
       - codecov/upload:
-          file: coverage
+          file:
