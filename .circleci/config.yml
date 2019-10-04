@@ -29,4 +29,9 @@ jobs:
           name: test
           command: npm run test
 
-      - codecov/upload
+      - run:
+          name: coverage
+          command: npm run coverage
+
+      - codecov/upload:
+          file: coverage

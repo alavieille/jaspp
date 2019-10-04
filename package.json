@@ -34,6 +34,7 @@
     "watch": "webpack --watch",
     "lint": "eslint src --ext .js",
     "test": "jest",
+    "coverage": "jest --collectCoverage=true"
   },
   "jest": {
     "collectCoverageFrom": [
