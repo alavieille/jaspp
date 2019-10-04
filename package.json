@@ -12,14 +12,17 @@
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "babel-loader": "^8.0.6",
-    "webpack-cli": "^3.1.2",
+    "core-js": "^3.2.1",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
     "webpack": "^4.20.0",
-    "core-js": "^3.2.1"
+    "webpack-cli": "^3.1.2"
   },
   "scripts": {
     "build": "webpack",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "lint": "eslint src --ext .js"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
