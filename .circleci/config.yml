@@ -8,8 +8,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - codecov/upload:
-          file: {{ coverage_report_filepath }
+
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
@@ -29,3 +28,5 @@ jobs:
       - run:
           name: test
           command: npm run test
+
+      - codecov/upload
