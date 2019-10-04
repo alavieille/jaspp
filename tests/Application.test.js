@@ -1,4 +1,4 @@
-import { Application } from '../dist/index.js';
+import { Application } from '../src/index.js';
 import TestComponent from './Components/TestComponent.js';
 import ErrorComponent from './Components/ErrorComponent.js';
 
@@ -37,7 +37,6 @@ test('Start application with two components', () => {
   expect(mockRender).toHaveBeenCalledWith(el2);
 });
 
-
 test('Test render component with dom.update event', () => {
   const components = {
     'TestComponent' : TestComponent
@@ -46,7 +45,7 @@ test('Test render component with dom.update event', () => {
   document.body.innerHTML =
     '<div>' +
     '  <div id="component1" data-view-component="TestComponent"></div>' +
-    '  <div class="update">' +
+    '  <div class="update" data-view-component="TestComponent">' +
     '     <div id="component2" data-view-component="TestComponent"></div>' +
     '  </div>' +
     '</div>';
@@ -55,8 +54,8 @@ test('Test render component with dom.update event', () => {
   const updateDomElement = document.querySelector('.update');
   app.dispatch('dom.update', updateDomElement);
 
-  expect(TestComponent).toHaveBeenCalledTimes(3);
-  expect(mockRender).toHaveBeenCalledTimes(3);
+  expect(TestComponent).toHaveBeenCalledTimes(5);
+  expect(mockRender).toHaveBeenCalledTimes(5);
 });
 
 test('Test application events: before:start, after:start', () => {

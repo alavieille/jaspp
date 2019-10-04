@@ -33,7 +33,13 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "lint": "eslint src --ext .js",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest --collectCoverage=true"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/*.js"
+    ]
   },
   "dependencies": {}
 }
