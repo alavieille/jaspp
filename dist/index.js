@@ -102,107 +102,193 @@ return /******/ (function(modules) { // webpackBootstrap
 __webpack_require__.r(__webpack_exports__);
 
 // CONCATENATED MODULE: ./src/Application.js
-class Application {
-  constructor(components, options = {}) {
-    const defaultOptions = {
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Application =
+/*#__PURE__*/
+function () {
+  function Application(components) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    _classCallCheck(this, Application);
+
+    var defaultOptions = {
       'dataAttribute': 'data-view-component'
     };
-    this.options = { ...defaultOptions,
-      ...options
-    };
+    this.options = _objectSpread({}, defaultOptions, {}, options);
     this.components = components;
     this.eventTopics = {};
   }
 
-  start() {
-    this.dispatch('before:start', this);
-    this.renderViewComponents(document);
-    this.addEventListener('dom.update', el => {
-      this.renderViewComponents(el);
-    });
-    this.dispatch('after:start', this);
-  }
+  _createClass(Application, [{
+    key: "start",
+    value: function start() {
+      var _this = this;
 
-  addEventListener(event, listener) {
-    if (!this.eventTopics[event] || this.eventTopics[event].length < 1) {
-      this.eventTopics[event] = [];
+      this.dispatch('before:start', this);
+      this.renderViewComponents(document);
+      this.addEventListener('dom.update', function (el) {
+        _this.renderViewComponents(el);
+      });
+      this.dispatch('after:start', this);
     }
+  }, {
+    key: "addEventListener",
+    value: function addEventListener(event, listener) {
+      if (!this.eventTopics[event] || this.eventTopics[event].length < 1) {
+        this.eventTopics[event] = [];
+      }
 
-    this.eventTopics[event].push(listener);
-  }
-
-  dispatch(event, params = {}) {
-    if (!this.eventTopics[event] || this.eventTopics[event].length < 1) {
-      return;
+      this.eventTopics[event].push(listener);
     }
+  }, {
+    key: "dispatch",
+    value: function dispatch(event) {
+      var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    this.eventTopics[event].forEach(listener => {
-      listener(params);
-    });
-  }
+      if (!this.eventTopics[event] || this.eventTopics[event].length < 1) {
+        return;
+      }
 
-  renderViewComponents(container) {
-    const componentsContainer = container.querySelectorAll('[' + this.options.dataAttribute + ']');
-
-    if (container instanceof HTMLElement && container.hasAttribute(this.options.dataAttribute)) {
-      this._renderViewComponent(container);
+      this.eventTopics[event].forEach(function (listener) {
+        listener(params);
+      });
     }
+  }, {
+    key: "renderViewComponents",
+    value: function renderViewComponents(container) {
+      var componentsContainer = container.querySelectorAll('[' + this.options.dataAttribute + ']');
 
-    for (const el of componentsContainer) {
-      this._renderViewComponent(el);
-    }
-  }
+      if (container instanceof HTMLElement && container.hasAttribute(this.options.dataAttribute)) {
+        this._renderViewComponent(container);
+      }
 
-  _renderViewComponent(el) {
-    const componentName = el.getAttribute(this.options.dataAttribute);
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-    if (this.components[componentName]) {
       try {
-        const componentClass = this.components[componentName];
-        const component = new componentClass(this);
-        component.render(el);
-      } catch (exception) {
-        console.log(exception);
-        this.dispatch('error', exception);
+        for (var _iterator = componentsContainer[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var el = _step.value;
+
+          this._renderViewComponent(el);
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
       }
     }
-  }
+  }, {
+    key: "_renderViewComponent",
+    value: function _renderViewComponent(el) {
+      var componentName = el.getAttribute(this.options.dataAttribute);
 
-}
-// CONCATENATED MODULE: ./src/Loader/ComponentsLoader.js
-class ComponentsLoader {
-  static import(require) {
-    const modules = {};
-
-    require.keys().forEach(key => {
-      const module = require(key);
-
-      if (module.default) {
-        const name = ComponentsLoader._getModuleName(key);
-
-        modules[name] = module.default;
+      if (this.components[componentName]) {
+        try {
+          var componentClass = this.components[componentName];
+          var component = new componentClass(this);
+          component.render(el);
+        } catch (exception) {
+          console.log(exception);
+          this.dispatch('error', exception);
+        }
       }
-    });
+    }
+  }]);
 
-    return modules;
+  return Application;
+}();
+
+
+// CONCATENATED MODULE: ./src/Loader/ComponentsLoader.js
+function ComponentsLoader_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function ComponentsLoader_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function ComponentsLoader_createClass(Constructor, protoProps, staticProps) { if (protoProps) ComponentsLoader_defineProperties(Constructor.prototype, protoProps); if (staticProps) ComponentsLoader_defineProperties(Constructor, staticProps); return Constructor; }
+
+var ComponentsLoader =
+/*#__PURE__*/
+function () {
+  function ComponentsLoader() {
+    ComponentsLoader_classCallCheck(this, ComponentsLoader);
   }
 
-  static _getModuleName(modulePath) {
-    return modulePath.replace('.js', '').replace('./', '');
-  }
+  ComponentsLoader_createClass(ComponentsLoader, null, [{
+    key: "import",
+    value: function _import(require) {
+      var modules = {};
 
-}
+      require.keys().forEach(function (key) {
+        var module = require(key);
+
+        if (module["default"]) {
+          var name = ComponentsLoader._getModuleName(key);
+
+          modules[name] = module["default"];
+        }
+      });
+
+      return modules;
+    }
+  }, {
+    key: "_getModuleName",
+    value: function _getModuleName(modulePath) {
+      return modulePath.replace('.js', '').replace('./', '');
+    }
+  }]);
+
+  return ComponentsLoader;
+}();
+
+
 // CONCATENATED MODULE: ./src/AbstractComponent.js
-class AbstractComponent {
-  constructor(application) {
+function AbstractComponent_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function AbstractComponent_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function AbstractComponent_createClass(Constructor, protoProps, staticProps) { if (protoProps) AbstractComponent_defineProperties(Constructor.prototype, protoProps); if (staticProps) AbstractComponent_defineProperties(Constructor, staticProps); return Constructor; }
+
+var AbstractComponent =
+/*#__PURE__*/
+function () {
+  function AbstractComponent(application) {
+    AbstractComponent_classCallCheck(this, AbstractComponent);
+
     this.application = application;
   }
 
-  render(el) {
-    throw new Error('Method start should be implement');
-  }
+  AbstractComponent_createClass(AbstractComponent, [{
+    key: "render",
+    value: function render(el) {
+      throw new Error('Method start should be implement');
+    }
+  }]);
 
-}
+  return AbstractComponent;
+}();
+
+
 // CONCATENATED MODULE: ./src/index.js
 /* concated harmony reexport Application */__webpack_require__.d(__webpack_exports__, "Application", function() { return Application; });
 /* concated harmony reexport ComponentsLoader */__webpack_require__.d(__webpack_exports__, "ComponentsLoader", function() { return ComponentsLoader; });
