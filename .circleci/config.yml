@@ -1,4 +1,6 @@
 version: 2
+orbs:
+  codecov: codecov/codecov@1.0.2
 jobs:
   build:
     docker:
@@ -26,6 +28,5 @@ jobs:
           name: test
           command: npm run test
 
-      - run:
-          name: coverage
-          command: npm run coverage -- --coverageReporters=text-lcov | ./node_modules/.bin/coveralls
+      - codecov/upload:
+          file: {{ coverage_report_filepath }}

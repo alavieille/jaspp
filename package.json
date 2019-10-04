@@ -22,7 +22,6 @@
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "core-js": "^3.2.1",
-    "coveralls": "^3.0.6",
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
@@ -35,7 +34,6 @@
     "watch": "webpack --watch",
     "lint": "eslint src --ext .js",
     "test": "jest",
-    "coverage": "npm test -- --coverage"
   },
   "jest": {
     "collectCoverageFrom": [
