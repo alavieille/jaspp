@@ -8,6 +8,14 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alavieille/jaspp.git"
+  },
+  "homepage": "https://github.com/alavieille/jaspp/blob/master/README.md",
+  "bugs": {
+    "url": "https://github.com/alavieille/jaspp/issues"
+  },
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
