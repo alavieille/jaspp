@@ -123,7 +123,7 @@ function () {
     _classCallCheck(this, Application);
 
     var defaultOptions = {
-      'dataAttribute': 'data-view-component'
+      dataAttribute: 'data-view-component'
     };
     this.options = _objectSpread({}, defaultOptions, {}, options);
     this.components = components;
@@ -167,49 +167,30 @@ function () {
   }, {
     key: "renderViewComponents",
     value: function renderViewComponents(container) {
-      var componentsContainer = container.querySelectorAll('[' + this.options.dataAttribute + ']');
+      var _this2 = this;
+
+      var componentsContainer = container.querySelectorAll("[".concat(this.options.dataAttribute, "]"));
 
       if (container instanceof HTMLElement && container.hasAttribute(this.options.dataAttribute)) {
-        this._renderViewComponent(container);
+        this.renderViewComponent(container);
       }
 
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = componentsContainer[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var el = _step.value;
-
-          this._renderViewComponent(el);
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
+      componentsContainer.forEach(function (el) {
+        _this2.renderViewComponent(el);
+      });
     }
   }, {
-    key: "_renderViewComponent",
-    value: function _renderViewComponent(el) {
+    key: "renderViewComponent",
+    value: function renderViewComponent(el) {
       var componentName = el.getAttribute(this.options.dataAttribute);
 
       if (this.components[componentName]) {
         try {
-          var componentClass = this.components[componentName];
+          var componentClass = this.components[componentName]; // eslint-disable-next-line new-cap
+
           var component = new componentClass(this);
           component.render(el);
         } catch (exception) {
-          console.log(exception);
           this.dispatch('error', exception);
         }
       }
@@ -240,11 +221,11 @@ function () {
       var modules = {};
 
       require.keys().forEach(function (key) {
+        // eslint-disable-next-line import/no-dynamic-require
         var module = require(key);
 
         if (module["default"]) {
-          var name = ComponentsLoader._getModuleName(key);
-
+          var name = ComponentsLoader.getModuleName(key);
           modules[name] = module["default"];
         }
       });
@@ -252,8 +233,8 @@ function () {
       return modules;
     }
   }, {
-    key: "_getModuleName",
-    value: function _getModuleName(modulePath) {
+    key: "getModuleName",
+    value: function getModuleName(modulePath) {
       return modulePath.replace('.js', '').replace('./', '');
     }
   }]);
@@ -269,6 +250,7 @@ function AbstractComponent_defineProperties(target, props) { for (var i = 0; i <
 
 function AbstractComponent_createClass(Constructor, protoProps, staticProps) { if (protoProps) AbstractComponent_defineProperties(Constructor.prototype, protoProps); if (staticProps) AbstractComponent_defineProperties(Constructor, staticProps); return Constructor; }
 
+/* eslint class-methods-use-this: "off", no-unused-vars: "off" */
 var AbstractComponent =
 /*#__PURE__*/
 function () {

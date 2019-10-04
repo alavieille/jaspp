@@ -1,6 +1,6 @@
 import { AbstractComponent } from '../../dist/index.js';
 
-export default class ErrorComponents extends AbstractComponent {
+export default class ErrorComponent extends AbstractComponent {
   render(el) {
     throw new Error('Error');
   }
