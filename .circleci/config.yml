@@ -25,3 +25,7 @@ jobs:
       - run:
           name: test
           command: npm run test
+
+      - run:
+          name: coverage
+          command: npm run coverage -- --coverageReporters=text-lcov | coveralls
