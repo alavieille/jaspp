@@ -4,3 +4,4 @@
 [![Downloads](https://img.shields.io/npm/dt/jaspp.svg?style=flat-square)](https://www.npmjs.com/package/jaspp)
 ![Filesize](https://img.shields.io/bundlephobia/min/jaspp.svg)
 ![CircleCI](https://img.shields.io/circleci/build/github/alavieille/jaspp/master?style=flat-square)
+[![codecov](https://codecov.io/gh/alavieille/jaspp/branch/master/graph/badge.svg)](https://codecov.io/gh/alavieille/jaspp)
