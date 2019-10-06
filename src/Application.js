@@ -1,4 +1,8 @@
 export default class Application {
+  /**
+   * @param {Object} components
+   * @param {Object} options
+   */
   constructor(components, options = {}) {
     const defaultOptions = {
       dataAttribute: 'data-view-component',
@@ -9,6 +13,9 @@ export default class Application {
     this.eventTopics = {};
   }
 
+  /**
+   * Start all components
+   */
   start() {
     this.dispatch('before:start', this);
     this.renderViewComponents(document);
@@ -18,6 +25,10 @@ export default class Application {
     this.dispatch('after:start', this);
   }
 
+  /**
+   * @param {String} event
+   * @param {Function} listener
+   */
   addEventListener(event, listener) {
     if (!this.eventTopics[event] || this.eventTopics[event].length < 1) {
       this.eventTopics[event] = [];
@@ -25,6 +36,10 @@ export default class Application {
     this.eventTopics[event].push(listener);
   }
 
+  /**
+   * @param {String} event
+   * @param {Object} params
+   */
   dispatch(event, params = {}) {
     if (!this.eventTopics[event] || this.eventTopics[event].length < 1) {
       return;
@@ -34,6 +49,9 @@ export default class Application {
     });
   }
 
+  /**
+   * @param {Element} container
+   */
   renderViewComponents(container) {
     const componentsContainer = container.querySelectorAll(`[${this.options.dataAttribute}]`);
     if (container instanceof HTMLElement && container.hasAttribute(this.options.dataAttribute)) {
@@ -44,6 +62,9 @@ export default class Application {
     });
   }
 
+  /**
+   * @param {Element} el
+   */
   renderViewComponent(el) {
     const componentName = el.getAttribute(this.options.dataAttribute);
     if (this.components[componentName]) {
