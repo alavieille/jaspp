@@ -1,4 +1,4 @@
-import { AbstractComponent } from '../../../dist/index.js';
+import { AbstractComponent } from 'jaspp';
 
 export default class TodoApp extends AbstractComponent {
   render(el) {

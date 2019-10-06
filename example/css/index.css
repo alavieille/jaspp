@@ -350,6 +350,15 @@ html .clear-completed:active {
     font-weight: 400;
 }
 
+.info .source-link {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+.info .source-link img {
+    margin: 0 10px;
+}
+
 .info a:hover {
     text-decoration: underline;
 }
