@@ -14,6 +14,6 @@
     "watch": "webpack --watch"
   },
   "dependencies": {
-    "jaspp": "0.0.10"
+    "jaspp": "^1.0.0"
   }
 }
