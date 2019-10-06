@@ -655,11 +655,14 @@ __webpack_require__.r(__webpack_exports__);
 
 const components = jaspp__WEBPACK_IMPORTED_MODULE_0__["ComponentsLoader"].import(__webpack_require__(2));
 const app = new jaspp__WEBPACK_IMPORTED_MODULE_0__["Application"](components);
-app.addEventListener('before:start', app => {
+app.addEventListener('before:start', () => {
   console.log('Application before start event');
 });
-app.addEventListener('after:start', app => {
+app.addEventListener('after:start', () => {
   console.log('Application after start event');
+});
+app.addEventListener('error', exception => {
+  console.log(exception);
 });
 app.start();
 

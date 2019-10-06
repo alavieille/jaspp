@@ -1,6 +1,6 @@
 {
   "name": "jaspp",
-  "version": "0.0.10",
+  "version": "1.0.0",
   "description": "Lightweight JavaScript library for building javascript application",
   "main": "dist/index.js",
   "author": "Amaury Lavieille",
