@@ -1,4 +1,4 @@
-import {Application, ComponentsLoader} from "../../dist/index.js";
+import {Application, ComponentsLoader} from 'jaspp';
 
 const components = ComponentsLoader.import(require.context('./Components/', true, /\.js$/));
 const app = new Application(components);

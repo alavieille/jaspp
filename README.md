@@ -15,7 +15,7 @@ Jaspp is Lightweight JavaScript library for handle javascript in a website.
   
 ### Example
 
-[Todo List](https://github.com/alavieille/jaspp/tree/master/example)
+[Todo List](https://alavieille.github.io/jaspp/example/)
 
 ### Getting Started
 
