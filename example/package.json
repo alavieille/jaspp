@@ -2,16 +2,18 @@
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
-    "core-js": "^3.2.1",
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "babel-loader": "^8.0.6",
+    "core-js": "^3.2.1",
+    "webpack": "^4.20.0",
     "webpack-cli": "^3.1.2",
-    "webpack": "^4.20.0"
+    "webpack-dev-server": "^3.9.0"
   },
   "scripts": {
     "build": "webpack",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "server": "webpack-dev-server -d --config webpack.config.js"
   },
   "dependencies": {
     "jaspp": "^1.0.0"

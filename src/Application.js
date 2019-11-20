@@ -53,10 +53,11 @@ export default class Application {
    * @param {Element} container
    */
   renderViewComponents(container) {
-    const componentsContainer = container.querySelectorAll(`[${this.options.dataAttribute}]`);
     if (container instanceof HTMLElement && container.hasAttribute(this.options.dataAttribute)) {
       this.renderViewComponent(container);
     }
+
+    const componentsContainer = Array.prototype.slice.call(container.querySelectorAll(`[${this.options.dataAttribute}]`), 0);
     componentsContainer.forEach((el) => {
       this.renderViewComponent(el);
     });
