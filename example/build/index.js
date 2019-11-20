@@ -227,9 +227,8 @@ return /******/ (function(modules) { // webpackBootstrap
       }, {
         key: "renderViewComponents",
         value: function (e) {
-          var t = this,
-              n = e.querySelectorAll("[".concat(this.options.dataAttribute, "]"));
-          e instanceof HTMLElement && e.hasAttribute(this.options.dataAttribute) && this.renderViewComponent(e), n.forEach(function (e) {
+          var t = this;
+          e instanceof HTMLElement && e.hasAttribute(this.options.dataAttribute) && this.renderViewComponent(e), Array.prototype.slice.call(e.querySelectorAll("[".concat(this.options.dataAttribute, "]")), 0).forEach(function (e) {
             t.renderViewComponent(e);
           });
         }
@@ -324,15 +323,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jaspp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 /* harmony import */ var jaspp__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jaspp__WEBPACK_IMPORTED_MODULE_0__);
 
-const components = jaspp__WEBPACK_IMPORTED_MODULE_0__["ComponentsLoader"].import(__webpack_require__(2));
-const app = new jaspp__WEBPACK_IMPORTED_MODULE_0__["Application"](components);
-app.addEventListener('before:start', () => {
+var components = jaspp__WEBPACK_IMPORTED_MODULE_0__["ComponentsLoader"]["import"](__webpack_require__(2));
+var app = new jaspp__WEBPACK_IMPORTED_MODULE_0__["Application"](components);
+app.addEventListener('before:start', function () {
   console.log('Application before start event');
 });
-app.addEventListener('after:start', () => {
+app.addEventListener('after:start', function () {
   console.log('Application after start event');
 });
-app.addEventListener('error', exception => {
+app.addEventListener('error', function (exception) {
   console.log(exception);
 });
 app.start();
@@ -375,53 +374,85 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TodoApp; });
 /* harmony import */ var jaspp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 /* harmony import */ var jaspp__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jaspp__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-class TodoApp extends jaspp__WEBPACK_IMPORTED_MODULE_0__["AbstractComponent"] {
-  render(el) {
-    const inputAdd = el.querySelector('.new-todo');
-    inputAdd.addEventListener("keyup", event => {
-      event.preventDefault();
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-      if (event.keyCode === 13) {
-        if (inputAdd.value === '') {
-          return;
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var TodoApp =
+/*#__PURE__*/
+function (_AbstractComponent) {
+  _inherits(TodoApp, _AbstractComponent);
+
+  function TodoApp() {
+    _classCallCheck(this, TodoApp);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(TodoApp).apply(this, arguments));
+  }
+
+  _createClass(TodoApp, [{
+    key: "render",
+    value: function render(el) {
+      var _this = this;
+
+      var inputAdd = el.querySelector('.new-todo');
+      inputAdd.addEventListener("keyup", function (event) {
+        event.preventDefault();
+
+        if (event.keyCode === 13) {
+          if (inputAdd.value === '') {
+            return;
+          }
+
+          _this._add(inputAdd.value, el);
+
+          inputAdd.value = '';
         }
+      });
+    }
+  }, {
+    key: "_add",
+    value: function _add(value, el) {
+      var list = el.querySelector('.todo-list');
 
-        this._add(inputAdd.value, el);
+      var id = this._generateId();
 
-        inputAdd.value = '';
-      }
-    });
-  }
+      var item = "\n      <li data-id=\"".concat(id, "\" data-view-component=\"TodoItem\">\n        <div class=\"view\">\n          <input class=\"toggle\" type=\"checkbox\">\n          <label>").concat(value, "</label>\n          <button class=\"destroy\"></button>\n        </div>\n      </li>\n    ");
+      list.insertAdjacentHTML('beforeend', item);
+      this.application.dispatch('dom.update', el.querySelector('[data-id=' + id + ']'));
+    }
+  }, {
+    key: "_clearAll",
+    value: function _clearAll(el) {
+      var list = el.querySelector('.todo-list');
+      list.innerHTML = '';
+    }
+  }, {
+    key: "_generateId",
+    value: function _generateId() {
+      return '_' + Math.random().toString(36).substr(2, 9);
+    }
+  }]);
 
-  _add(value, el) {
-    const list = el.querySelector('.todo-list');
+  return TodoApp;
+}(jaspp__WEBPACK_IMPORTED_MODULE_0__["AbstractComponent"]);
 
-    const id = this._generateId();
 
-    const item = `
-      <li data-id="${id}" data-view-component="TodoItem">
-        <div class="view">
-          <input class="toggle" type="checkbox">
-          <label>${value}</label>
-          <button class="destroy"></button>
-        </div>
-      </li>
-    `;
-    list.insertAdjacentHTML('beforeend', item);
-    this.application.dispatch('dom.update', el.querySelector('[data-id=' + id + ']'));
-  }
-
-  _clearAll(el) {
-    const list = el.querySelector('.todo-list');
-    list.innerHTML = '';
-  }
-
-  _generateId() {
-    return '_' + Math.random().toString(36).substr(2, 9);
-  }
-
-}
 
 /***/ }),
 /* 4 */
@@ -432,22 +463,60 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TodoApp; });
 /* harmony import */ var jaspp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
 /* harmony import */ var jaspp__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jaspp__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-class TodoApp extends jaspp__WEBPACK_IMPORTED_MODULE_0__["AbstractComponent"] {
-  render(el) {
-    const deleteButton = el.querySelector('.destroy');
-    deleteButton.addEventListener('click', event => {
-      event.preventDefault();
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-      this._delete(el);
-    });
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var TodoApp =
+/*#__PURE__*/
+function (_AbstractComponent) {
+  _inherits(TodoApp, _AbstractComponent);
+
+  function TodoApp() {
+    _classCallCheck(this, TodoApp);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(TodoApp).apply(this, arguments));
   }
 
-  _delete(el) {
-    el.parentNode.removeChild(el);
-  }
+  _createClass(TodoApp, [{
+    key: "render",
+    value: function render(el) {
+      var _this = this;
 
-}
+      var deleteButton = el.querySelector('.destroy');
+      deleteButton.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        _this._delete(el);
+      });
+    }
+  }, {
+    key: "_delete",
+    value: function _delete(el) {
+      el.parentNode.removeChild(el);
+    }
+  }]);
+
+  return TodoApp;
+}(jaspp__WEBPACK_IMPORTED_MODULE_0__["AbstractComponent"]);
+
+
 
 /***/ })
 /******/ ]);
