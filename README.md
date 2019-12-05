@@ -33,7 +33,7 @@ Create a component to handle javascript of a DOM Element
 
 import {AbstractComponent} from 'jaspp'
 
-class YourComponent extend AbstractComponent 
+class YourComponent extends AbstractComponent 
 {
     render(el) {
         // handle javascript of el element
@@ -121,7 +121,7 @@ app.addEventListener('error', (exception) => {
 ```
 import {AbstractComponent} from 'jaspp'
 
-class YourComponent extend AbstractComponent 
+class YourComponent extends AbstractComponent 
 {
     render(el) {
        const template = `
