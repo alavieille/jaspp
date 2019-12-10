@@ -33,7 +33,7 @@ Create a component to handle javascript of a DOM Element
 
 import {AbstractComponent} from 'jaspp'
 
-class YourComponent extends AbstractComponent 
+export default class YourComponent extends AbstractComponent 
 {
     render(el) {
         // handle javascript of el element
@@ -47,7 +47,7 @@ Create Application and register your components
 ```
 //index.js
 import {Application} from "jasp";
-import YourComponent from "components/YourComponent.js";
+import YourComponent from "components/YourComponent";
 
 const components = {
     'YourComponent' : YourComponent
