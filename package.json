@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "Lightweight JavaScript library for building javascript application",
   "main": "dist/index.js",
+  "module": "src/index.js",
   "author": "Amaury Lavieille",
   "license": "MIT",
   "files": [
