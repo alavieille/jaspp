@@ -8,6 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     libraryTarget: 'umd',
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -15,8 +16,8 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
-        }
-      }
-    ]
-  }
+        },
+      },
+    ],
+  },
 };

@@ -162,7 +162,20 @@ return /******/ (function(modules) { // webpackBootstrap
       return n;
     }
 
-    function o(e, t, n) {
+    function o(e) {
+      for (var t = 1; t < arguments.length; t++) {
+        var n = null != arguments[t] ? arguments[t] : {};
+        t % 2 ? r(Object(n), !0).forEach(function (t) {
+          i(e, t, n[t]);
+        }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n)) : r(Object(n)).forEach(function (t) {
+          Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(n, t));
+        });
+      }
+
+      return e;
+    }
+
+    function i(e, t, n) {
       return t in e ? Object.defineProperty(e, t, {
         value: n,
         enumerable: !0,
@@ -171,7 +184,11 @@ return /******/ (function(modules) { // webpackBootstrap
       }) : e[t] = n, e;
     }
 
-    function i(e, t) {
+    function a(e, t) {
+      if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
+    }
+
+    function u(e, t) {
       for (var n = 0; n < t.length; n++) {
         var r = t[n];
         r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
@@ -180,29 +197,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
     n.r(t);
 
-    var a = function () {
+    var c = function () {
       function e(t) {
         var n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-        !function (e, t) {
-          if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
-        }(this, e);
-        this.options = function (e) {
-          for (var t = 1; t < arguments.length; t++) {
-            var n = null != arguments[t] ? arguments[t] : {};
-            t % 2 ? r(n, !0).forEach(function (t) {
-              o(e, t, n[t]);
-            }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n)) : r(n).forEach(function (t) {
-              Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(n, t));
-            });
-          }
-
-          return e;
-        }({}, {
+        a(this, e);
+        var r = {
           dataAttribute: "data-view-component"
-        }, {}, n), this.components = t, this.eventTopics = {};
+        };
+        this.options = o({}, r, {}, n), this.components = t, this.eventTopics = {};
       }
 
-      var t, n, a;
+      var t, n, r;
       return t = e, (n = [{
         key: "start",
         value: function () {
@@ -242,17 +247,17 @@ return /******/ (function(modules) { // webpackBootstrap
             this.dispatch("error", e);
           }
         }
-      }]) && i(t.prototype, n), a && i(t, a), e;
+      }]) && u(t.prototype, n), r && u(t, r), e;
     }();
 
-    function u(e, t) {
+    function f(e, t) {
       for (var n = 0; n < t.length; n++) {
         var r = t[n];
         r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
       }
     }
 
-    var c = function () {
+    var s = function () {
       function e() {
         !function (e, t) {
           if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
@@ -278,17 +283,17 @@ return /******/ (function(modules) { // webpackBootstrap
         value: function (e) {
           return e.replace(".js", "").replace("./", "");
         }
-      }], (n = null) && u(t.prototype, n), r && u(t, r), e;
+      }], (n = null) && f(t.prototype, n), r && f(t, r), e;
     }();
 
-    function f(e, t) {
+    function l(e, t) {
       for (var n = 0; n < t.length; n++) {
         var r = t[n];
         r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r);
       }
     }
 
-    var s = function () {
+    var p = function () {
       function e(t) {
         !function (e, t) {
           if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function");
@@ -301,15 +306,15 @@ return /******/ (function(modules) { // webpackBootstrap
         value: function (e) {
           throw new Error("Method start should be implement");
         }
-      }]) && f(t.prototype, n), r && f(t, r), e;
+      }]) && l(t.prototype, n), r && l(t, r), e;
     }();
 
     n.d(t, "Application", function () {
-      return a;
-    }), n.d(t, "ComponentsLoader", function () {
       return c;
-    }), n.d(t, "AbstractComponent", function () {
+    }), n.d(t, "ComponentsLoader", function () {
       return s;
+    }), n.d(t, "AbstractComponent", function () {
+      return p;
     });
   }]);
 });

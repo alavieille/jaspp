@@ -6,7 +6,8 @@
   "author": "Amaury Lavieille",
   "license": "MIT",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "repository": {
     "type": "git",
