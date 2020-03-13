@@ -2,8 +2,9 @@ export default class Application {
   /**
    * @param {Object} components
    * @param {Object} options
+   * @param {Boolean} debug
    */
-  constructor(components, options = {}) {
+  constructor(components, options = {}, debug = false) {
     const defaultOptions = {
       dataAttribute: 'data-view-component',
     };
@@ -11,6 +12,7 @@ export default class Application {
     this.options = { ...defaultOptions, ...options };
     this.components = components;
     this.eventTopics = {};
+    this.debug = debug;
   }
 
   /**
@@ -76,6 +78,9 @@ export default class Application {
         component.render(el);
       } catch (exception) {
         this.dispatch('error', exception);
+        if (this.debug) {
+          throw exception;
+        }
       }
     }
   }

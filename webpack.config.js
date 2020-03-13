@@ -7,6 +7,11 @@ module.exports = {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
     libraryTarget: 'umd',
+    library: 'jaspp',
+    umdNamedDefine: true,
+  },
+  optimization: {
+    minimize: false,
   },
   devtool: 'source-map',
   module: {
